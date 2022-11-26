@@ -32,7 +32,7 @@
 
 .text
 .globl update_matrix
-update_matrix
+update_matrix:
 
 lw $t0, ($a0)
            #         |Machine |Player
@@ -52,7 +52,7 @@ machine_insert:
 srl $t1, $t1, 8
 
 insert:
-srl $t1, $t1, $a2
+srlv $t1, $t1, $a2
 
           #0000000000000000001000000000
           #xxxxxxxxxxxxxxxxxxxxxxxxxxxx

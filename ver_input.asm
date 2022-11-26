@@ -30,13 +30,16 @@
 
 
 
+.text
+.globl ver_input
 
+ver_input:
 
-and $t0, $a0, ox3FFFF #Erase any memory trash or error possible
+andi $t0, $a0, 0x03FFFF #Erase any memory trash or error possible
 
 sllv $t0, $t0, $a1 
 
-and $t0, $t0, 0x201
+andi $t0, $t0, 0x0201
 
 seq $v0, $t0, 0
 
