@@ -24,14 +24,12 @@
 
 # Map Parameters:
 # $a0 -- Matrix address
-# $a1 -- round
-# 0 - Player
-# 1 - Máquina
 #
 #Map return $v1
 # 0 <= Player Ganhou
 # 1 <= Maquina Ganhou
 # 2 <= Empate Ganhou
+# 4 <= Não Acabou
 
 
 #234567891234567890123456789012345678901234567890123456789012345678901234567890
@@ -55,7 +53,7 @@ andi $t2, $t2, 0x1FF
 
 #Tie:
 li $v1, 2
-beq $t2, 0x1FF, end
+beq $t2, 0x1FF, exit
 
 #Player
 li $v1, 0
@@ -63,26 +61,26 @@ move $t3, $t0
 
 
 verif:
-beq $t3, 0x7, end   # Linha 0
-beq $t3, 0x38, end  # Linha 1
-beq $t3, 0x1C0, end # Linha 2
+beq $t3, 0x07, exit   # Linha 0
+beq $t3, 0x038, exit  # Linha 1
+beq $t3, 0x01C0, exit # Linha 2
 
-beq $t3, 0x49, end  # Coluna 0
-beq $t3, 0x92, end  # Coluna 1
-beq $t3, 0x124, end # Coluna 2
+beq $t3, 0x049, exit  # Coluna 0
+beq $t3, 0x092, exit  # Coluna 1
+beq $t3, 0x0124, exit # Coluna 2
 
-beq $t3, 0x111, end # Diagonal Principal 
-beq $t3, 0x54, end # Diagonal Secundária
+beq $t3, 0x0111, exit # Diagonal Principal 
+beq $t3, 0x054, exit # Diagonal Secundária
 
-#Nenhum Fim
-beq $v1, 1, exit
+#Nenhum Fim --_ Ainda não Acabou
+beq $v1, 1, end
 #Machine
 move $t3, $t1
 li $v1, 1
 j verif
 
 end:
-li $v0, 1
+li $v0, 4
 exit:
 jr $ra
 
