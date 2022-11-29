@@ -39,7 +39,7 @@ win:
 li $v0, 1
 j exit
 
-
+# --------------
 fork:
  sw $s0, ($sp)
  sw $s1, ($sp)
@@ -56,7 +56,7 @@ beq $s3, 9, exit
 ori $t0, $s1, 0x01
 bnez $t0, continue
 
-li $t2, 0x01
+li $t2, 0x0200
 sllv $t2, $t2, $s3
 or $t2, $t2, $s0
 addi $sp, $sp, -4
@@ -71,8 +71,8 @@ move $v0, $s2
 continue:
 srl $s1, $s1, 1
 addi $s3, $s3, 1
-
-
+j loop
+# --------------
 exit:
 # --------------
 lw $ra ($sp)

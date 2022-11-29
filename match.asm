@@ -58,6 +58,7 @@ beqz $s0, player_move
 
 machine_move:
 
+jal minimax
 
 j ver_end
 
@@ -79,6 +80,9 @@ jal update_matrix
 ver_end:
 jal end_match
 seq $s0, $s0, 0
+
+jal print
+
 bnez $v0, loop
 
 exit:

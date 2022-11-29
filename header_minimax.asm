@@ -32,19 +32,20 @@ or $s1, $s1, $s0
 li $s4, -3
 li $s3, 0
 # --------------
-
+#Quem sabe eu tenha provlema em usar registradores temporarios
 loop:
 beq $s3, 9, end 
 ori $t0, $s1, 0x01
 bnez $t0, continue
 
-li $t2, 0x200
+li $t2, 0x0200
 sllv $t2, $t2, $s3
 or $t2, $t2, $s0
 
 addi $sp, $sp, -4
 sw $t2, ($sp)
 jal minimax_min
+lw $t2 ($sp)
 addi $sp, $sp, 4
 
 
