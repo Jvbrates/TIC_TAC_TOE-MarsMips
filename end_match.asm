@@ -20,7 +20,7 @@
 
 # Prologue:
 #this code verify the end of match
-#case true return 1 in $v0 and the code of end in $v1 
+#case true return 1 in $v0 (else return 0) and the code of end in $v1 
 
 # Map Parameters:
 # $a0 -- Matrix address
@@ -29,7 +29,7 @@
 # 0 <= Player Ganhou
 # 1 <= Maquina Ganhou
 # 2 <= Empate Ganhou
-# 4 <= Não Acabou
+
 
 
 #234567891234567890123456789012345678901234567890123456789012345678901234567890
@@ -53,7 +53,7 @@ andi $t2, $t2, 0x1FF
 
 #Tie:
 li $v1, 2
-beq $t2, 0x1FF, exit
+beq $t2, 0x1FF, end ## Estranho
 
 #Player
 li $v1, 0
@@ -61,26 +61,26 @@ move $t3, $t0
 
 
 verif:
-beq $t3, 0x07, exit   # Linha 0
-beq $t3, 0x038, exit  # Linha 1
-beq $t3, 0x01C0, exit # Linha 2
+beq $t3, 0x07, end   # Linha 0
+beq $t3, 0x038, end  # Linha 1
+beq $t3, 0x01C0, end # Linha 2
 
-beq $t3, 0x049, exit  # Coluna 0
-beq $t3, 0x092, exit  # Coluna 1
-beq $t3, 0x0124, exit # Coluna 2
+beq $t3, 0x049, end  # Coluna 0
+beq $t3, 0x092, end  # Coluna 1
+beq $t3, 0x0124, end # Coluna 2
 
-beq $t3, 0x0111, exit # Diagonal Principal 
-beq $t3, 0x054, exit # Diagonal Secundária
+beq $t3, 0x0111, end # Diagonal Principal 
+beq $t3, 0x054, end # Diagonal Secundária
 
 #Nenhum Fim --_ Ainda não Acabou
-beq $v1, 1, end
+beq $v1, 1, exit
 #Machine
 move $t3, $t1
 li $v1, 1
 j verif
 
 end:
-li $v0, 4
+li $v0, 0
 exit:
 jr $ra
 

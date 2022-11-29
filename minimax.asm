@@ -1,13 +1,13 @@
 #Map Param:
-# $a0 -- the matrix
+# $a0 -- the matrix address
 # $a1 -- Who is playing | 
 #Map Return:
 # $v0 -- The postion changed
 
 .text
 
-.globl minimax
-minimax:
+.globl minimax2
+minimax2:
 
 # --------------
 jal stack_push
@@ -18,7 +18,6 @@ sw $ra, ($sp)
 # --------------
 lw $t0, ($a0)
 beqz $t0, first_move 
-
 
 # --------------
 
