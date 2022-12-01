@@ -24,9 +24,7 @@
 # $sp: $a0
 
 
-# registers map:
-# $a0: matrix address
-# $ra: 
+
 
 
 .text
@@ -46,19 +44,21 @@ sw $ra, 12($sp)#store $ra in the stack
 #for this, is need send matrix addres in $a0. So will store curretly $a0  value in $s0 
 add $s0, $zero, $a0
 la $a0, 8($sp) 
-jal eraseMatrix
 
 
 # From here, use $s0 as user option
 # $a0 -- matrix address
 # $s0 -- round, player or machine
+jal eraseMatrix # Limpa matriz
+jal print
 
 loop:
+ 
 beqz $s0, player_move
 
 machine_move:
 
-jal minimax
+jal minimax #Movimento Máquina
 
 j ver_end
 
@@ -66,6 +66,10 @@ player_move:
 
 jal input_move_pl
 
+
+
+
+ver_end:
 # the next function need the paramns:
 # $a0 -- matrix address
 # already setted
@@ -74,16 +78,14 @@ add $a1, $zero, $s0
 # $a2 -- input address
 add $a2, $zero, $v0
 # case in the future I need use $a1 or $a2 before this function I will need push they in the stack before call this function
-jal update_matrix
+
+jal update_matrix #Atualiza a matriz
+jal print         #Mostra ela 
+jal end_match     #Verifica o fim
+seq $s0, $s0, 0 # Troca de quem é a vez
 
 
-ver_end:
-jal end_match
-seq $s0, $s0, 0
-
-jal print
-
-bnez $v0, loop
+beqz $v0, loop
 
 exit:
 
@@ -91,5 +93,9 @@ exit:
 lw $a0, ($sp)
 lw $a1, 4($sp)
 lw $ra, 12($sp)
-add $sp, $sp, 16 # erase stack
+add $sp, $sp, 16 # erase stack <<<<<---
 jr $ra #return to caller
+
+
+
+

@@ -31,7 +31,7 @@ main:
 li $v0, 42
 li $a1, 2
 syscall
-
+li $a0, 1
 
 move $s0, $a0
 # 0 - Player
@@ -54,20 +54,27 @@ jal match
 # Atualiza o placar
 # Recebe as opcoes em $a0 com a mesma
 # correspondencia da funcao match
-move $a0, $v0
+move $a0, $v1
 jal update_score
-
+jal print_score
 
 #Menu [(n)ew Match | (e)xit]
 jal menu_exit
 bnez $v0, loop_match
 
-li $v0, 10
+
+#Finalizando | Ending
+li $t0, 1
+li $v0, 17
+li $a0, 0
+
 syscall
 
 .data
-.globl placar
-placar: .space 12
+.globl placar_
+
+.align 0
+placar_: .space 12
 #placar 0 is user
 #placar 4 is machine
 #placar 8 is tied

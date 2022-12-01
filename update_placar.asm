@@ -32,20 +32,20 @@ jr $ra
 
 player:
 lw  $t1, ($t0)     ## Carregando o placar atual do player
-addi $t0, $t0, 1 ## Somando:  placar+1
+addi $t1, $t1, 1 ## Somando:  placar+1
 sw $t1, ($t0)      ## Salvando o novo valor no placar
 jr $ra		 ## Saindo
 
 
 machine:
 lw  $t1, 4($t0)
-addi $t0, $t0, 1
+addi $t1, $t1, 1
 sw $t1, 4($t0)
 jr $ra
 
 
 tie:
 lw  $t1, 8($t0)
-addi $t0, $t0, 1
+addi $t1, $t1, 1
 sw $t1, 8($t0)
 jr $ra

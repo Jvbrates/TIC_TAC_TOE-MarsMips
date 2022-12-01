@@ -4,9 +4,9 @@
 minimax_max:
 
 # --------------
-jal stack_push
 addi $sp, $sp, -4
 sw $ra, ($sp)
+jal stack_push
 # --------------
 
 # Verifica se esta possibilidade é um fim de partida, caso não, testa as demais possibilidades que surgem desta
@@ -35,8 +35,9 @@ j exit
 
 #Testas as demais possibilidades, retornando a que dar o resultado com maior pontuação
 fork:
-sw $s0, ($sp)
- sw $s1, ($sp)
+
+ lw $s0, ($a0)
+ lw $s1, ($a0)
  
  srl $s1, $s1, 9
  or $s1, $s1, $s0
@@ -55,10 +56,12 @@ sw $s0, ($sp)
  or $t2, $t2, $s0
  addi $sp, $sp, -4
  sw $t2, ($sp)
+ la $a0, ($sp)
  jal minimax_min
  addi $sp, $sp, 4 
  
- blt $s2, $v0, continue
+# blt $s2, $v0, continue
+ bgt $s4, $v0, continue
  move $v0, $s2
 
  
@@ -68,9 +71,11 @@ sw $s0, ($sp)
   j loop
 # -------------- 
 exit:
+# --------------
+jal stack_pop
 lw $ra ($sp)
 addi $sp, $sp, 4
-jal stack_pop
 # --------------
+
 
 jr $ra

@@ -32,15 +32,20 @@
 
 .text
 .globl ver_input
-
 ver_input:
+
+
+move $t6, $a0
+
+lw $a0, ($t6)
 
 andi $t0, $a0, 0x03FFFF #Erase any memory trash or error possible
 
-sllv $t0, $t0, $a1 
+srlv $t0, $t0, $a1 
 
 andi $t0, $t0, 0x0201
 
 seq $v0, $t0, 0
 
+move $a0, $t6
 jr $ra

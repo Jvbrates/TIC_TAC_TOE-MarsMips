@@ -36,7 +36,9 @@
 .text
 .globl end_match
 end_match:
-
+#move $s0, $ra
+#jal print
+#move $ra, $s0
 li $v0, 0
 #Carregando matrix de Jogador 
 lw $t0, ($a0)
@@ -44,16 +46,12 @@ andi $t0, $t0, 0x1FF
 
 #Carregando matrix de maquina 
 lw $t1, ($a0)
-srl $t1, $t1, 8
+srl $t1, $t1, 9
 andi $t1, $t1, 0x1FF
 
 #Merge duas matrizes
 or  $t2, $t1, $t0
 andi $t2, $t2, 0x1FF
-
-#Tie:
-li $v1, 2
-beq $t2, 0x1FF, end ## Estranho
 
 #Player
 li $v1, 0
@@ -61,26 +59,45 @@ move $t3, $t0
 
 
 verif:
-beq $t3, 0x07, end   # Linha 0
-beq $t3, 0x038, end  # Linha 1
-beq $t3, 0x01C0, end # Linha 2
+andi $t4, $t3, 0x07 
+beq $t4, 0x07, end   # Linha 0
 
-beq $t3, 0x049, end  # Coluna 0
-beq $t3, 0x092, end  # Coluna 1
-beq $t3, 0x0124, end # Coluna 2
+andi $t4, $t3, 0x038 
+beq $t4, 0x038, end  # Linha 1
 
-beq $t3, 0x0111, end # Diagonal Principal 
-beq $t3, 0x054, end # Diagonal Secundária
+andi $t4, $t3, 0x01C0 
+beq $t4, 0x01C0, end # Linha 2
+
+andi $t4, $t3, 0x049 
+beq $t4, 0x049, end  # Coluna 0
+
+andi $t4, $t3, 0x092 
+beq $t4, 0x092, end  # Coluna 1
+
+andi $t4, $t3, 0x0124 
+beq $t4, 0x0124, end # Coluna 2
+
+andi $t4, $t3, 0x0111 
+beq $t4, 0x0111, end # Diagonal Principal 
+
+andi $t4, $t3, 0x054 
+beq $t4, 0x054, end # Diagonal Secundária
 
 #Nenhum Fim --_ Ainda não Acabou
-beq $v1, 1, exit
+beq $v1, 1, tie
+
 #Machine
 move $t3, $t1
 li $v1, 1
 j verif
 
+tie:
+li $v1, 2
+beq $t2, 0x1FF, end 
+j exit
+
 end:
-li $v0, 0
+li $v0, 1
 exit:
 jr $ra
 

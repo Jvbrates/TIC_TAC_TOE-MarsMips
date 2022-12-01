@@ -16,9 +16,10 @@
 minimax:
 
 # --------------
-jal stack_push
 addi $sp, $sp, -4
 sw $ra, ($sp)
+jal stack_push
+# --------------
 
 
 lw $s0, ($a0)
@@ -28,6 +29,7 @@ move $s1, $s0
 srl $s1, $s1, 9
 
 or $s1, $s1, $s0
+andi $s1, $s1, 0x1FF
 
 li $s4, -3
 li $s3, 0
@@ -35,7 +37,7 @@ li $s3, 0
 #Quem sabe eu tenha provlema em usar registradores temporarios
 loop:
 beq $s3, 9, end 
-ori $t0, $s1, 0x01
+andi $t0, $s1, 0x01
 bnez $t0, continue
 
 li $t2, 0x0200
@@ -44,13 +46,15 @@ or $t2, $t2, $s0
 
 addi $sp, $sp, -4
 sw $t2, ($sp)
+la $a0, ($sp)
 jal minimax_min
 lw $t2 ($sp)
 addi $sp, $sp, 4
 
 
-#----- Selecionando o máximo
-ble $s4, $v0, continue
+#----- Selecionando o máximo | Corrigir no m
+bgt $s4, $v0, continue
+#ble $v0, $s4 continue
 move $s4, $v0
 move $s5, $s3
 #-----
@@ -67,17 +71,18 @@ li $s5, 4
 
 end:
 # --------------
-lw $ra ($sp)
-addi $sp, $sp, 4
+
+#sw $t0, ($a0)
+move $v0, $s5
+
+
+# --------------
 jal stack_pop
+lw $ra ($sp) ## <<< ---- AQUI
+addi $sp, $sp, 4 
 # -------------- | Alterando Matrix 
 
-li $t0, 1
-sllv $t0, $t0, $s5
-lw $t1, ($a0)
-or $t0, $t0, $t1
 
-sw $t0, ($a0)
 
 
 jr $ra

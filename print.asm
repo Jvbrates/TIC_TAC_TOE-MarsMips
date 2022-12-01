@@ -30,10 +30,11 @@
 print:
 #set syscall print
 li $v0, 4
-lw $a0, ($sp)
+#lw $a0, ($sp)
 #save $a
+
 addi $sp, $sp, -4
-#la $a0, ($sp) # tests 
+sw $a0, ($sp) # tests 
 
 #Carregando matrix de Jogador 
 lw $t0, ($a0)
@@ -41,7 +42,7 @@ andi $t0, $t0, 0x1FF
 
 #Carregando matrix de maquina 
 lw $t1, ($a0)
-srl $t1, $t1, 8
+srl $t1, $t1, 9
 andi $t1, $t1, 0x1FF
 
 li $t7, 0 #Contador
@@ -96,10 +97,10 @@ addi $sp, $sp, 4
 
 jr $ra
 
-
+.globl player, machine, backspace, newline, colon
 .data
 player: .asciiz "|X|"
 machine: .asciiz "|O|"
 backspace: .asciiz "| |"
 newline: .asciiz "\n"
-
+colon: .asciiz ":"

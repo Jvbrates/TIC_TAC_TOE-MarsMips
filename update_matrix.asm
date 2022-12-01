@@ -49,10 +49,10 @@ machine_insert:
           #         |Machine |Player
           #          876543210876543210
           #0000000000000000001000000000
-srl $t1, $t1, 8
+sll $t1, $t1, 9
 
 insert:
-srlv $t1, $t1, $a2
+sllv $t1, $t1, $a2
 
           #0000000000000000001000000000
           #xxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -61,4 +61,4 @@ or $t0, $t0, $t1
 
 sw $t0, ($a0)
 
-jr $ra
+jr $ra #<< possivel erro

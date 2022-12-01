@@ -15,9 +15,9 @@
 minimax_min:
 
 # --------------
-jal stack_push
 addi $sp, $sp, -4
 sw $ra, ($sp)
+jal stack_push
 # --------------
 
 jal end_match
@@ -41,8 +41,8 @@ j exit
 
 # --------------
 fork:
- sw $s0, ($sp)
- sw $s1, ($sp)
+ lw $s0, ($a0)
+ lw $s1, ($a0)
  
  srl $s1, $s1, 9
  or $s1, $s1, $s0
@@ -53,19 +53,20 @@ fork:
 
 loop:
 beq $s3, 9, exit 
-ori $t0, $s1, 0x01
+andi $t0, $s1, 0x01
 bnez $t0, continue
 
-li $t2, 0x0200
+li $t2, 0x01
 sllv $t2, $t2, $s3
 or $t2, $t2, $s0
 addi $sp, $sp, -4
 sw $t2, ($sp)
+la $a0, ($sp)
 jal minimax_max
 addi $sp, $sp, 4
 
-bgt $s2, $v0, continue
-move $v0, $s2
+blt $s2, $v0, continue
+move $s2, $v0 
 
 
 continue:
@@ -74,10 +75,11 @@ addi $s3, $s3, 1
 j loop
 # --------------
 exit:
+move $v0, $s2
 # --------------
+jal stack_pop
 lw $ra ($sp)
 addi $sp, $sp, 4
-jal stack_pop
 # --------------
 
 jr $ra
