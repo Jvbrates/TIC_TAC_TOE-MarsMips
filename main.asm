@@ -71,10 +71,10 @@ li $a0, 0
 syscall
 
 .data
-.globl placar_
+.globl placar
 
 .align 0
-placar_: .space 12
+placar: .space 12
 #placar 0 is user
 #placar 4 is machine
 #placar 8 is tied
