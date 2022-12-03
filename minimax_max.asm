@@ -1,3 +1,37 @@
+# This code is a constituent part of work 1 of the Computer Organization Discipline [ELC1011]
+# https://github.com/Jvbrates/TIC_TAC_TOE-MarsMips/
+# This program is free software under GNU GPL V3 or later version
+# see http://www.gnu.org/licences
+
+# Autor: João Vitor Belmonte Rates(Jvbrates) - UFSM - CT
+# e-mail: jvrates%inf.ufsm.br
+#
+# 6/14
+# Prologue:
+# Este arquivo contem a parte inicial do algoritmo minimax para escolha da
+# posição que a máquina deve jogar | Está implementações possuí algumas 
+# diferenças em relação ao minimax original
+# Prologue:
+# This implement the minimax algorithm with some changes
+
+# IsCaller? Yes
+# IsCallee? Yes
+# ChangeRegisters? Yes
+# ManipulateStack? Yes
+# ManipulateDataSegment? No
+
+
+#Register Maps
+# $s0 -- Matrix complete
+# $s1 -- Matrix merged
+# $s2 -- score
+# $s3 -- contador
+
+
+#*******************************************************************************
+#        1         2         3         4         5         6         7         8
+#2345678901234567890123456789012345678901234567890123456789012345678901234567890
+
 .text
 .globl minimax_max
 
@@ -13,9 +47,6 @@ jal stack_push
 jal end_match
 beqz $v0, fork 
 
-# --------------
-#Aqui caso sim, este trecho de código é resultado de um má planejamento. 
-#Eu poderia ter escrito os códigos de fim de partida de fomra que fosse semelhante a pontuação da jogada para a máquina
 
 beq $v1, 2, empate
 beq $v1, 1, win

@@ -6,28 +6,21 @@
 # Autor: João Vitor Belmonte Rates(Jvbrates) - UFSM - CT
 # e-mail: jvrates%inf.ufsm.br
 #
-# 4/10
+# 8/14
+# Próologo:
+# Esta função válida a entrada do usuário
 # Prologue:
-# this file-code get the player input and verfify if is aceptable
+# This function validate the input from user
 
 #IsCaller? No
 #IsCallee? Yes
 #ChangeRegisters? Yes
 #ManipulateStack? No
-#ManipulateHeap? No
 #ManipulateDataSegment? No
 
-
-# Prologue:
-# This code get the player input and return the address (in matrix) to put int the matrix
-# 
-# This code get the matrix address and the option to input and verify if it's is used
-# from the caller (keep save on return):
-# $a0 -- matrix address
-# $s0 -- round, player or machine
-# $a1 -- option inputed
-# return 0 case used and 1 case no ($v0)
-
+#*******************************************************************************
+#        1         2         3         4         5         6         7         8
+#2345678901234567890123456789012345678901234567890123456789012345678901234567890
 
 
 .text

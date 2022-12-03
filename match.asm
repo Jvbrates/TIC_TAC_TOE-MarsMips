@@ -1,12 +1,15 @@
 # This code is a constituent part of work 1 of the Computer Organization Discipline [ELC1011]
-#
 # https://github.com/Jvbrates/TIC_TAC_TOE-MarsMips/
 # This program is free software under GNU GPL V3 or later version
 # see http://www.gnu.org/licences
+
 # Autor: João Vitor Belmonte Rates(Jvbrates) - UFSM - CT
 # e-mail: jvrates%inf.ufsm.br
 #
-# 1/10
+# 1/14
+# Prologue:
+# Este arquivo contem a função que administra uma partoda até que termine
+# e então retorna o resultado
 # Prologue:
 # This file-code will initialize and management the match
 
@@ -14,18 +17,12 @@
 # IsCallee? Yes
 # ChangeRegisters? Yes
 # ManipulateStack? Yes
-# ManipulateHeap? No
 # ManipulateDataSegment? Yes
 
-# stack map:
-# $sp+12: $ra
-# $sp+8: matrix
-# $sp+4: $a1
-# $sp: $a0
 
-
-
-
+#*******************************************************************************
+#        1         2         3         4         5         6         7         8
+#2345678901234567890123456789012345678901234567890123456789012345678901234567890
 
 .text
 
@@ -46,11 +43,11 @@ add $s0, $zero, $a0
 la $a0, 8($sp) 
 
 
-# From here, use $s0 as user option
 # $a0 -- matrix address
 # $s0 -- round, player or machine
+
 jal eraseMatrix # Limpa matriz
-jal print
+jal print # Escrever a matriz na saída
 
 loop:
  
@@ -95,7 +92,3 @@ lw $a1, 4($sp)
 lw $ra, 12($sp)
 add $sp, $sp, 16 # erase stack <<<<<---
 jr $ra #return to caller
-
-
-
-

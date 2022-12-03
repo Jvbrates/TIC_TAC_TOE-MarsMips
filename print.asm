@@ -1,21 +1,21 @@
 #This code is a constituent part of work 1 of the Computer Organization Discipline [ELC1011]
-# Revised?Yes, tested isolated
 # https://github.com/Jvbrates/TIC_TAC_TOE-MarsMips/
 # This program is free software under GNU GPL V3 or later version
 # see http://www.gnu.org/licences
 # Autor: João Vitor Belmonte Rates(Jvbrates) - UFSM - CT
 # e-mail: jvrates%inf.ufsm.br
 #
-# 8/10
+# 3/14
+# Prólogo;
+# Esta função escreve a matriz na saída
 # Prologue:
 # This function just print the matrix
 
 #IsCaller? No
 #IsCallee? Yes
 #ChangeRegisters? Yes
-#ManipulateStack? Yes
-#ManipulateHeap? No
-#ManipulateDataSegment? Yes
+#ManipulateStack? No
+#ManipulateDataSegment? Yes | see end of file
 
 # Map Parameters:
 # $a0 -- Matrix address
@@ -25,6 +25,12 @@
 # $t1 -- machine Matrix
 # $t3 -- comparative
 # $t7 -- contador
+
+
+#*******************************************************************************
+#        1         2         3         4         5         6         7         8
+#2345678901234567890123456789012345678901234567890123456789012345678901234567890
+
 .text 
 .globl print
 print:
@@ -97,10 +103,11 @@ addi $sp, $sp, 4
 
 jr $ra
 
+# This  strigns also be used by another print functions
 .globl player, machine, backspace, newline, colon
 .data
 player: .asciiz "|X|"
 machine: .asciiz "|O|"
 backspace: .asciiz "| |"
 newline: .asciiz "\n"
-colon: .asciiz ":"
+colon: .asciiz ":" 

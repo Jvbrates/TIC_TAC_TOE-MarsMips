@@ -1,4 +1,4 @@
-#This code is a constituent part of work 1 of the Computer Organization Discipline [ELC1011]
+# This code is a constituent part of work 1 of the Computer Organization Discipline [ELC1011]
 #
 # https://github.com/Jvbrates/TIC_TAC_TOE-MarsMips/
 # This program is free software under GNU GPL V3 or later version
@@ -6,33 +6,28 @@
 # Autor: João Vitor Belmonte Rates(Jvbrates) - UFSM - CT
 # e-mail: jvrates%inf.ufsm.br
 #
-# 6/10
+# 10/14
+# Prólogo:
+# Está função verifica se a partida acabou, se sim retorna que ganhou ou empate
 # Prologue:
-# this file-code get the player input and verfify if is aceptable
+# This return the state of match
 
 #IsCaller? No
 #IsCallee? Yes
-#ChangeRegisters? Yes
-#ManipulateStack? No
-#ManipulateHeap? No
+#ChangeRegisters? No
+#ManipulateStack? Yes
 #ManipulateDataSegment? No
 
-
-# Prologue:
-#this code verify the end of match
-#case true return 1 in $v0 (else return 0) and the code of end in $v1 
-
-# Map Parameters:
-# $a0 -- Matrix address
-#
 #Map return $v1
 # 0 <= Player Ganhou
 # 1 <= Maquina Ganhou
 # 2 <= Empate Ganhou
 
+#*******************************************************************************
+#        1         2         3         4         5         6         7         8
+#2345678901234567890123456789012345678901234567890123456789012345678901234567890
 
 
-#234567891234567890123456789012345678901234567890123456789012345678901234567890
 .text
 .globl end_match
 end_match:
@@ -100,7 +95,6 @@ end:
 li $v0, 1
 exit:
 jr $ra
-
 
 
 

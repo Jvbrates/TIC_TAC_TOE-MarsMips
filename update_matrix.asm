@@ -6,20 +6,17 @@
 # Autor: João Vitor Belmonte Rates(Jvbrates) - UFSM - CT
 # e-mail: jvrates%inf.ufsm.br
 #
-# 5/10
+# 9/14
+# Prólogo:
+# Está função insere a opção do usuário|máquina na matriz
 # Prologue:
-# this file-code get the player input and verfify if is aceptable
+# This function insert the option from machine|player in the matrix
 
 #IsCaller? No
 #IsCallee? Yes
 #ChangeRegisters? No
 #ManipulateStack? Yes
-#ManipulateHeap? No
 #ManipulateDataSegment? No
-
-
-# Prologue:
-# This file-code will update the matrix
 
 # Map Parameters:
 # $a0 -- Matrix address
@@ -27,8 +24,9 @@
 # $a2 -- input address matrix
 # none return
 
-
-#234567891234567890123456789012345678901234567890123456789012345678901234567890
+#*******************************************************************************
+#        1         2         3         4         5         6         7         8
+#2345678901234567890123456789012345678901234567890123456789012345678901234567890
 
 .text
 .globl update_matrix

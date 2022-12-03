@@ -6,21 +6,24 @@
 # Autor: João Vitor Belmonte Rates(Jvbrates) - UFSM - CT
 # e-mail: jvrates%inf.ufsm.br
 
-# 0/10
+# 0/14
+# Prólogo:
+# Este arquivo contèm a main(função raiz) do projeto
 # Prologue:
-# This code is the mains of project
+# This code is the main of project
 
 #IsCaller? Yes
 #IsCallee? No
 #ChangeRegisters? Yes
 #ManipulateStack? No
 #ManipulateHeap? No
+#ManipulateDataSegment? Yes | Allocate 3 bytes for SCORE
 
-#ManipulateDataSegment? Yes
-#Allocate 3 bytes for SCORE
+#*******************************************************************************
+#        1         2         3         4         5         6         7         8
+#2345678901234567890123456789012345678901234567890123456789012345678901234567890
 
-#Register Maps:
-# $a0: Who init the match
+
 .text
 
 .globl main
@@ -31,37 +34,35 @@ main:
 li $v0, 42
 li $a1, 2
 syscall
-li $a0, 1
+# li $a0, 1 #for tests
 
 move $s0, $a0
 # 0 - Player
 # 1 - Máquina
 
 loop_match:
-#Inverte a seleção do primeiro jogador, inverter um numero aleatorio ainda o
-#mantem aleatorio
+
+#Inverte a seleção do primeiro jogador
 seq $a0, $a0, 0 #if $a0 == 0 : $a0 := 1
 
 
 # Execução da partida
 # Recebe em $a0 a matriz usada
 jal match
-# Retornará em $v0 o resultado da partida:
+# Retornará em $v1 o resultado da partida:
 # 0 <= Player Ganhou
 # 1 <= Maquina Ganhou
 # 2 <= Empate Ganhou
 
-# Atualiza o placar
-# Recebe as opcoes em $a0 com a mesma
-# correspondencia da funcao match
+
 move $a0, $v1
-jal update_score
-jal print_score
+jal update_score # Atualiza o placar, recebe o código de quem ganhou em $a0
+jal print_score  # Escreve na saída a pontiação
 
-#Menu [(n)ew Match | (e)xit]
-jal menu_exit
-bnez $v0, loop_match
 
+jal menu_exit # Menu [(n)ew Match | (e)xit]
+bnez $v0, loop_match #Caso a escolha seja 0 o programa encerrará,
+# caso não, nova partida
 
 #Finalizando | Ending
 li $t0, 1
@@ -72,7 +73,6 @@ syscall
 
 .data
 .globl placar
-
 .align 0
 placar: .space 12
 #placar 0 is user

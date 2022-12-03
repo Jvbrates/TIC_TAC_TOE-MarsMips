@@ -1,22 +1,27 @@
 # This code is a constituent part of work 1 of the Computer Organization Discipline [ELC1011]
-#
 # https://github.com/Jvbrates/TIC_TAC_TOE-MarsMips/
 # This program is free software under GNU GPL V3 or later version
 # see http://www.gnu.org/licences
+#
 # Autor: João Vitor Belmonte Rates(Jvbrates) - UFSM - CT
 # e-mail: jvrates%inf.ufsm.br
-#
-# 11/11
-# Prologue:
-# This file-code contain functions to store and restore the registers values on stack
-# no store de $ra
 
-# IsCaller? No
-# IsCallee? Yes
-# ChangeRegisters? Yes
-# ManipulateStack? Yes
-# ManipulateHeap? No
-# ManipulateDataSegment? No
+# 144/14
+# Prólogo:
+# Este arquivo duas funções auxiliares,
+# stack_push: Armazena os registradores $a* e $s* na stack
+# stack_pop: Restaura os registradores $a* e $s* da stack em sincronia com a
+# a função anterior
+
+#IsCaller? No
+#IsCallee? Yes
+#ChangeRegisters? Yes
+#ManipulateStack? Yes
+#ManipulateHeap? No
+
+#*******************************************************************************
+#        1         2         3         4         5         6         7         8
+#2345678901234567890123456789012345678901234567890123456789012345678901234567890
 
 .text
 .globl stack_push

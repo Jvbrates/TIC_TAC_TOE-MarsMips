@@ -1,21 +1,23 @@
-#Este código é parte constituinte do trabalho 1 da Disciplina Organização de 
-# Computadores [ELC1011]
-#
+# This code is a constituent part of work 1 of the Computer Organization Discipline [ELC1011]
+# https://github.com/Jvbrates/TIC_TAC_TOE-MarsMips/
 # This program is free software under GNU GPL V3 or later version
 # see http://www.gnu.org/licences
 #
 # Autor: João Vitor Belmonte Rates(Jvbrates) - UFSM - CT
 # e-mail: jvrates%inf.ufsm.br
-# This file-code get a value $a0 corresponding to a placar update and update de
-#value in placar(score) memory space
-# 0 <= Player Ganhou
-# 1 <= Maquina Ganhou
-# 2 <= Empate Ganhou
-# placar addressing
-#placar 0 is user
-#placar 4 is machine
-#placar 8 is tied
-#234567891234567890123456789012345678901234567890123456789012345678901234567890
+
+# 11/14
+# Prólogo:
+# Este arquivo recebe em $a0 o estado em que terminou a partida e atualiza o placar
+
+#IsCaller? No
+#IsCallee? Yes
+#ChangeRegisters? Yes
+#ManipulateStack? No
+
+#*******************************************************************************
+#        1         2         3         4         5         6         7         8
+#2345678901234567890123456789012345678901234567890123456789012345678901234567890
 
 .globl update_score
 

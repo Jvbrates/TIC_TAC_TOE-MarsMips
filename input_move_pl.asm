@@ -6,21 +6,21 @@
 # Autor: João Vitor Belmonte Rates(Jvbrates) - UFSM - CT
 # e-mail: jvrates%inf.ufsm.br
 #
-# 3/10
+# 7/14
+# Próologo:
+# Esta função recebe a entrada do usuário
 # Prologue:
-# this file-code set the initial matrix value
+# This function get input from user
 
 #IsCaller? Yes
 #IsCallee? Yes
 #ChangeRegisters? Yes
 #ManipulateStack? No
-#ManipulateHeap? No
 #ManipulateDataSegment? No
 
-
-# Prologue:
-# This code get the player input and return the address (in matrix) to put int the matrix
-
+#*******************************************************************************
+#        1         2         3         4         5         6         7         8
+#2345678901234567890123456789012345678901234567890123456789012345678901234567890
 
 .text
 
