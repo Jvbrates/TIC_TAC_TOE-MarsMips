@@ -6,7 +6,7 @@
 # Autor: João Vitor Belmonte Rates(Jvbrates) - UFSM - CT
 # e-mail: jvrates%inf.ufsm.br
 
-# 144/14
+# 14/14
 # Prólogo:
 # Este arquivo duas funções auxiliares,
 # stack_push: Armazena os registradores $a* e $s* na stack
